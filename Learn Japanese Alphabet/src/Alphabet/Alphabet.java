@@ -22,30 +22,36 @@ public abstract class Alphabet {
         U
     }
 
-    public List<Letter> has_letter = new ArrayList<>();
+    protected List<Letter> has_letter = new ArrayList<>();
+    protected List<Letter> has_letter_copy = new ArrayList<>();
 
-    public List<String> list_symbols_A;
-    public List<String> list_correct_answer_A;
+    protected List<String> list_symbols_A;
+    protected List<String> list_correct_answer_A;
+    public String wrong_answers_A = "";
 
-    public List<String> list_symbols_E;
-    public List<String> list_correct_answer_E;
+    protected List<String> list_symbols_E;
+    protected List<String> list_correct_answer_E;
+    public String wrong_answers_E = "";
 
-    public List<String> list_symbols_I;
-    public List<String> list_correct_answer_I;
+    protected List<String> list_symbols_I;
+    protected List<String> list_correct_answer_I;
+    public String wrong_answers_I = "";
 
-    public List<String> list_symbols_O;
-    public List<String> list_correct_answer_O;
+    protected List<String> list_symbols_O;
+    protected List<String> list_correct_answer_O;
+    public String wrong_answers_O = "";
 
-    public List<String> list_symbols_U;
-    public List<String> list_correct_answer_U;
+    protected List<String> list_symbols_U;
+    protected List<String> list_correct_answer_U;
+    public String wrong_answers_U = "";
 
     protected Letter current_letter;
 
     Alphabet(Letter... has_letter){
         for (Letter letter : has_letter) {
             this.has_letter.add(letter);
+            this.has_letter_copy.add(letter);
         }
-        System.out.println(this.has_letter.toString());
     }
 
     protected void create_copies_symbols(String[] a, String[] e, String[] i, String[] o, String[] u){
@@ -99,7 +105,7 @@ public abstract class Alphabet {
             return Letter.E;
         } else if(list_symbols_I != null && !list_symbols_I.isEmpty() && list_symbols_I.contains(symbol)){
             return Letter.I;
-        } else if(list_symbols_O != null && !list_symbols_O.isEmpty() && list_symbols_U.contains(symbol)){
+        } else if(list_symbols_O != null && !list_symbols_O.isEmpty() && list_symbols_O.contains(symbol)){
             return Letter.O;
         } else if(list_symbols_U != null && !list_symbols_U.isEmpty() && list_symbols_U.contains(symbol)){
             return Letter.U;
@@ -205,6 +211,45 @@ public abstract class Alphabet {
 
     public Letter get_current_letter() {
         return current_letter;
+    }
+
+    public boolean has_only_one_string(){
+        if (has_letter.size() != 1) {
+            return false;
+        } else {
+            switch (has_letter.get(0)) {
+            case A:
+                if(list_symbols_A.size() == 1){
+                    return true;
+                }
+                break;
+            case E:
+                if(list_symbols_E.size() == 1){
+                    return true;
+                }
+                break;
+            case I:
+                if(list_symbols_I.size() == 1){
+                    return true;
+                }
+                break;
+            case O:
+                if(list_symbols_O.size() == 1){
+                    return true;
+                }
+                break;
+            case U:
+                if(list_symbols_U.size() == 1){
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
+    }
+
+    public List<Letter> get_letters() {
+        return has_letter_copy;
     }
 
     public boolean is_empty(){

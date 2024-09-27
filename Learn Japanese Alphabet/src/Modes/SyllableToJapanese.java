@@ -1,15 +1,19 @@
 package src.Modes;
 
+import java.util.List;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import src.Alphabet.Alphabet.Alphabets;
-import src.Alphabet.Alphabet.Letter;
+import src.GUI.Window;
 import src.Alphabet.Hiragana;
+import src.Alphabet.Katakana;
 
 public class SyllableToJapanese extends Mode{
 
@@ -21,12 +25,30 @@ public class SyllableToJapanese extends Mode{
     JButton next_button = new JButton();
     JButton show_question_button = new JButton();
 
-    public SyllableToJapanese(int x, int y, int width, int height){
+    JButton button_exit = new JButton("Exit");
+
+    public SyllableToJapanese(){}
+
+    public SyllableToJapanese(int x, int y, int width, int height, 
+        List<Alphabets> alphabets, Hiragana hiragana, Katakana katakana, boolean by_elimination){
+        super(alphabets, hiragana, katakana, by_elimination);
         this.setBounds(x, y, width, height);
         this.setBackground(Color.GRAY);
         this.setLayout(null);
 
         add(characters_label);
+
+        button_exit.setSize(75, 40);
+        button_exit.setLocation((int) (width / 1.03) - button_exit.getWidth(), 5);
+        button_exit.setFocusPainted(false);
+        button_exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Window.back_to_config();
+            }
+        });
+        button_exit.setCursor(Window.hand_cursor);
+        add(button_exit);
 
         next_button.setSize(width / 4, height / 3);
         next_button.setLocation((int) ((width - next_button.getWidth()) / 1.1), (height - next_button.getHeight()) / 2);
@@ -34,6 +56,7 @@ public class SyllableToJapanese extends Mode{
         next_button.setText("Answer");
         next_button.setFocusPainted(false);
         next_button.addActionListener(l -> actionListener(l));
+        next_button.setCursor(Window.hand_cursor);
         add(next_button);
 
         show_question_button.setSize(width / 4, height / 8);
@@ -43,6 +66,7 @@ public class SyllableToJapanese extends Mode{
         show_question_button.setFocusPainted(false);
         show_question_button.setEnabled(false);
         show_question_button.addActionListener(l -> actionListener(l));
+        show_question_button.setCursor(Window.hand_cursor);
         add(show_question_button);
 
         adjust_panel();
@@ -80,10 +104,6 @@ public class SyllableToJapanese extends Mode{
     
     @Override
     protected void adjust_panel() {
-        hiragana = new Hiragana(Letter.A);
-        alphabets.add(Alphabets.HIRAGANA);
-        is_random_by_elimination = true;
-
         get_random_question();
         characters_label.setText(string_in_syllable);
         adjust_characters_label(string_in_syllable, false);

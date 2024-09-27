@@ -1,12 +1,19 @@
-import src.Window;
+import src.GUI.Window;
+import src.Data.Data;
 
 public class Main{
 
+    //? First Phase
+    //!DONE PONTUATION
+    //!DONE END SCREEN
+    //!DONE SAVE DATA
+
+    //? Second Phase
+    //TODO IMPLEMENT KANJI
+    //TODO IMPLEMENT RESIZABLE
+
     public static void main(String[] args){
-        // char a = '\u3041';
-        // System.out.println(a);
-        // System.out.println("あ, い");
-        // System.out.println("こんにちは、世界！");
+        new Data();
         new Window(800, 600);
     }
 
