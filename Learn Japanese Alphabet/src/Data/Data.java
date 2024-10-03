@@ -42,12 +42,12 @@ public class Data {
         Path path = Paths.get(documentsPath + "/japData/");
         try {
             if(!Files.exists(path)){
-                System.out.println("Criando diretorio...");
+                // System.out.println("Criando diretorio...");
                 Path new_path = Files.createDirectories(path);
-                System.out.println("Diretorio criado!");
+                // System.out.println("Diretorio criado!");
                 return new_path;
             } else{
-                System.out.println("Diretorio ja existe! Retornando o caminho.");
+                // System.out.println("Diretorio ja existe! Retornando o caminho.");
                 return path;
             }
         } catch (IOException e) {
@@ -65,16 +65,16 @@ public class Data {
         if(!Files.exists(path)){
             create_file(path, create_user_data_json());
         } else{
-            System.out.println("Arquivo ja existe! Retornando o caminho.");
+            // System.out.println("Arquivo ja existe! Retornando o caminho.");
         }
         return path;
     }
 
     private static void create_file(Path path, JSONObject user_data){
         try {
-            System.out.println("Criando arquivo...");
+            // System.out.println("Criando arquivo...");
             Files.writeString(path, user_data.toJSONString());
-            System.err.println("Arquivo criado");
+            // System.err.println("Arquivo criado");
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Impossivel de criar o arquivo.", 
@@ -85,10 +85,10 @@ public class Data {
 
     private static JSONObject open_file(Path path){
         try {
-            System.out.println("Abrindo arquivo...");
+            // System.out.println("Abrindo arquivo...");
             JSONParser json_parser = new JSONParser();
             Object object = json_parser.parse(Files.readString(path));
-            System.out.println("Arquivo aberto!");
+            // System.out.println("Arquivo aberto!");
             return (JSONObject) object;
         } catch (IOException | ParseException e) {
         }
@@ -134,7 +134,7 @@ public class Data {
 
     @SuppressWarnings("unchecked")
     public static void save_file(){
-        System.out.println("Salvando arquivo...");
+        // System.out.println("Salvando arquivo...");
         JSONObject user_preset = new JSONObject();
 
         JSONArray alphabets = new JSONArray();
@@ -168,11 +168,11 @@ public class Data {
         user_preset.put("Study", study);
 
         create_file(file_path, user_preset);
-        System.out.println("Arquivo salvo!");
+        // System.out.println("Arquivo salvo!");
     }
 
     public static void load_file(){
-        System.out.println("Carregando arquivo...");
+        // System.out.println("Carregando arquivo...");
         JSONObject mode = (JSONObject) user_data.get("Mode");
         if((boolean) mode.get("is_japanese_to_syllable")){
             Config.set_japanese_to_syllable_selected();
@@ -206,7 +206,7 @@ public class Data {
                     Config.set_katakana_U_selected((boolean) alphabet.get("is_U_selected"));
             }
         }
-        System.out.println("Arquivo carregado!");
+        // System.out.println("Arquivo carregado!");
     }
 
 }

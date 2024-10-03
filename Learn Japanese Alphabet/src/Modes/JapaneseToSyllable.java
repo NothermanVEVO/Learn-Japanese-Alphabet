@@ -80,8 +80,8 @@ public class JapaneseToSyllable extends Mode{
             // System.out.println("Answer: " + answer + " | Correct Answer: " + string_in_syllable);
             if (answer.equals(string_in_syllable.toLowerCase())) {
                 // System.out.println("Acertou!");
+                Feedback.create_new_card("Q: " + string_in_japanese + " | A: " + answer, true);
                 if (is_random_by_elimination) {
-                    Feedback.create_new_card("Q: " + string_in_japanese + " | A: " + answer, true);
                     answered_right();
                 }
             } else{
