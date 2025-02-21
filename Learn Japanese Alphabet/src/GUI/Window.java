@@ -5,7 +5,9 @@ import java.util.List;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import src.Alphabet.Alphabet.Alphabets;

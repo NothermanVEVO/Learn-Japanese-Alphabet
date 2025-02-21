@@ -31,7 +31,7 @@ public class Data {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Impossivel de achar o arquivo.", 
                 "Erro", JOptionPane.ERROR_MESSAGE);
-            System.exit(-1);
+            // System.exit(-1);
         }
         user_data = open_file(file_path);
     }
@@ -53,7 +53,7 @@ public class Data {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Impossivel de criar o diretorio.", 
                 "Erro", JOptionPane.ERROR_MESSAGE);
-            System.exit(-1);
+            // System.exit(-1);
             return null;
         }
     }
@@ -79,7 +79,7 @@ public class Data {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Impossivel de criar o arquivo.", 
                 "Erro", JOptionPane.ERROR_MESSAGE);
-            System.exit(-1);
+            // System.exit(-1);
         }
     }
 
