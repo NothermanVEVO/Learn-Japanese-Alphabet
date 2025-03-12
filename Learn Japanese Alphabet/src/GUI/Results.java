@@ -55,6 +55,9 @@ public class Results extends JPanel {
     }
 
     private void create_hiragana_answers(){
+        // for (VLabel vl : v_labels_hiragana) {
+        //     System.out.println(vl.getText());
+        // }
         for (Letter letter : hiragana.get_letters()) {
             VLabel last_label = v_labels_hiragana.get(v_labels_hiragana.size() - 1);
             switch (letter) {
@@ -133,6 +136,20 @@ public class Results extends JPanel {
     public void set_labels(Hiragana hiragana, Katakana katakana){
         this.hiragana = hiragana;
         this.katakana = katakana;
+
+        if (hiragana != null) {
+            System.out.println("Hiragana letters size: " + hiragana.get_letters().size());
+        } else{
+            System.out.println("Hiragana eh null");
+        }
+        if (katakana != null){
+            System.out.println("Katakana letters size: " + katakana.get_letters().size());
+        } else{
+            System.out.println("Katakana eh null");
+        }
+
+        removeAll();
+        adjust_button_continue();
 
         //? Hiragana
         hiragana_title = new VLabel("Hiragana", true);

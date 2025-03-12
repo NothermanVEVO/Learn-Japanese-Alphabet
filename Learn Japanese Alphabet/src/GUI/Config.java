@@ -108,70 +108,62 @@ public class Config extends JPanel{
             List<Letter> letters_katakana = new ArrayList<>();
             Hiragana hiragana = null;
             Katakana katakana = null;
-            if(!check_hiragana.isSelected() && !check_katakana.isSelected()){
-                JOptionPane.showMessageDialog(null, 
-                        "You have to choose at least ONE alphabet!", 
-                        "Error: No alphabet choosed.", JOptionPane.ERROR_MESSAGE);
-                return;
+
+            // HIRAGANA
+            if(letter_hir_A.isSelected()){
+                letters_hiragana.add(Letter.A);
             }
-            if (check_hiragana.isSelected()) {
+            if(letter_hir_E.isSelected()){
+                letters_hiragana.add(Letter.E);
+            }
+            if(letter_hir_I.isSelected()){
+                letters_hiragana.add(Letter.I);
+            }
+            if(letter_hir_O.isSelected()){
+                letters_hiragana.add(Letter.O);
+            }
+            if(letter_hir_U.isSelected()){
+                letters_hiragana.add(Letter.U);
+            }
+            if (!letters_hiragana.isEmpty()) {
                 alphabets.add(Alphabets.HIRAGANA);
-                if(letter_hir_A.isSelected()){
-                    letters_hiragana.add(Letter.A);
-                }
-                if(letter_hir_E.isSelected()){
-                    letters_hiragana.add(Letter.E);
-                }
-                if(letter_hir_I.isSelected()){
-                    letters_hiragana.add(Letter.I);
-                }
-                if(letter_hir_O.isSelected()){
-                    letters_hiragana.add(Letter.O);
-                }
-                if(letter_hir_U.isSelected()){
-                    letters_hiragana.add(Letter.U);
-                }
-                if (letters_hiragana.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, 
-                        "You have to choose at least ONE letter in Hiragana!", 
-                        "Error: No letter choosed. | Hiragana", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
                 Letter[] letters = new Letter[letters_hiragana.size()];
                 for (int i = 0; i < letters.length; i++) {
                     letters[i] = letters_hiragana.get(i);
-                    // System.out.println(letters[i]);
                 }
                 hiragana = new Hiragana(letters);
             }
-            if (check_katakana.isSelected()) {
+
+            // KATAKANA
+            if(letter_kat_A.isSelected()){
+                letters_katakana.add(Letter.A);
+            }
+            if(letter_kat_E.isSelected()){
+                letters_katakana.add(Letter.E);
+            }
+            if(letter_kat_I.isSelected()){
+                letters_katakana.add(Letter.I);
+            }
+            if(letter_kat_O.isSelected()){
+                letters_katakana.add(Letter.O);
+            }
+            if(letter_kat_U.isSelected()){
+                letters_katakana.add(Letter.U);
+            }
+            if (!letters_katakana.isEmpty()) {
                 alphabets.add(Alphabets.KATAKANA);
-                if(letter_kat_A.isSelected()){
-                    letters_katakana.add(Letter.A);
-                }
-                if(letter_kat_E.isSelected()){
-                    letters_katakana.add(Letter.E);
-                }
-                if(letter_kat_I.isSelected()){
-                    letters_katakana.add(Letter.I);
-                }
-                if(letter_kat_O.isSelected()){
-                    letters_katakana.add(Letter.O);
-                }
-                if(letter_kat_U.isSelected()){
-                    letters_katakana.add(Letter.U);
-                }
-                if (letters_katakana.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, 
-                        "You have to choose at least ONE letter in Katakana!", 
-                        "Error: No letter choosed. | Katakana", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
                 Letter[] letters = new Letter[letters_katakana.size()];
                 for (int i = 0; i < letters.length; i++) {
                     letters[i] = letters_katakana.get(i);
                 }
                 katakana = new Katakana(letters);
+            }
+            
+            if (letters_hiragana.isEmpty() && letters_katakana.isEmpty()) {
+                JOptionPane.showMessageDialog(null, 
+                    "You have to choose at least ONE letter of an alphabet!", 
+                    "Error: No letter choosed.", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             Modes mode = Modes.SYLLABLE_TO_JAPANESE;
             boolean by_elimination = false;
@@ -182,6 +174,34 @@ public class Config extends JPanel{
                 by_elimination = true;
             }
             Window.create_mode(mode, alphabets, hiragana, katakana, by_elimination);
+        } else if(l.getSource() == check_hiragana){
+            if (check_hiragana.isSelected()) {
+                letter_hir_A.setSelected(true);
+                letter_hir_E.setSelected(true);
+                letter_hir_I.setSelected(true);
+                letter_hir_O.setSelected(true);
+                letter_hir_U.setSelected(true);
+            } else{
+                letter_hir_A.setSelected(false);
+                letter_hir_E.setSelected(false);
+                letter_hir_I.setSelected(false);
+                letter_hir_O.setSelected(false);
+                letter_hir_U.setSelected(false);
+            }
+        } else if(l.getSource() == check_katakana){
+            if (check_katakana.isSelected()) {
+                letter_kat_A.setSelected(true);
+                letter_kat_E.setSelected(true);
+                letter_kat_I.setSelected(true);
+                letter_kat_O.setSelected(true);
+                letter_kat_U.setSelected(true);
+            } else{
+                letter_kat_A.setSelected(false);
+                letter_kat_E.setSelected(false);
+                letter_kat_I.setSelected(false);
+                letter_kat_O.setSelected(false);
+                letter_kat_U.setSelected(false);
+            }
         }
     }
 
@@ -201,6 +221,7 @@ public class Config extends JPanel{
         check_hiragana.setText("Hiragana");
         check_hiragana.setSize(check_hiragana.getFont().getSize() * check_hiragana.getText().length(), 
             check_hiragana.getHeight());
+        check_hiragana.addActionListener(l -> action_listener(l));
         check_hiragana.setFocusPainted(false);
 
         //-----------------------------------------------------------------------//
@@ -248,6 +269,7 @@ public class Config extends JPanel{
         check_katakana.setText("Katakana");
         check_katakana.setSize(check_katakana.getFont().getSize() * check_katakana.getText().length(), 
             check_katakana.getHeight());
+        check_katakana.addActionListener(l -> action_listener(l));
         check_katakana.setFocusPainted(false);
 
         //-----------------------------------------------------------------------//
